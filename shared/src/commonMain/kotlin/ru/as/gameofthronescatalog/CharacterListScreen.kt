@@ -61,8 +61,6 @@ private fun CharacterCard(
     character: Character,
     onIntent: (CharacterListIntent) -> Unit,
 ) {
-    val resources = character.resources()
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -77,12 +75,13 @@ private fun CharacterCard(
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = stringResource(resources.name),
+                    text = character.name,
                     style = MaterialTheme.typography.titleMedium,
                 )
                 Text(
-                    text = character.cultureResource()?.let { stringResource(it) }
-                        ?: stringResource(Res.string.not_available),
+                    text = character.culture.ifBlank {
+                        stringResource(Res.string.not_available)
+                    },
                 )
             }
             Button(onClick = { onIntent(CharacterListIntent.CharacterClicked(character.id)) }) {

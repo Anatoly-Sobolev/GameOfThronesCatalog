@@ -55,19 +55,18 @@ fun CharacterDetailScreen(
                 modifier = Modifier.padding(16.dp),
             )
         } else {
-            val resources = character.resources()
-            CharacterField(Res.string.name_label, resources.name)
-            CharacterField(Res.string.gender_label, character.genderResource())
-            CharacterField(Res.string.culture_label, character.cultureResource())
-            CharacterField(Res.string.born_label, resources.born)
-            CharacterField(Res.string.died_label, resources.died)
-            CharacterField(Res.string.titles_label, resources.titles)
+            CharacterField(Res.string.name_label, character.name)
+            CharacterField(Res.string.gender_label, character.gender)
+            CharacterField(Res.string.culture_label, character.culture)
+            CharacterField(Res.string.born_label, character.born)
+            CharacterField(Res.string.died_label, character.died)
+            CharacterField(Res.string.titles_label, character.titles.joinToString())
         }
     }
 }
 
 @Composable
-private fun CharacterField(label: StringResource, value: StringResource?) {
+private fun CharacterField(label: StringResource, value: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -77,10 +76,10 @@ private fun CharacterField(label: StringResource, value: StringResource?) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(stringResource(label), style = MaterialTheme.typography.labelLarge)
             Text(
-                if (value == null) {
+                if (value.isBlank()) {
                     stringResource(Res.string.not_available)
                 } else {
-                    stringResource(value)
+                    value
                 },
             )
         }
