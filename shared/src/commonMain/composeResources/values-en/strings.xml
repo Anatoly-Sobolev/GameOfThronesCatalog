@@ -10,6 +10,8 @@
     <string name="russian_language">Русский</string>
     <string name="english_language">English</string>
     <string name="empty_list">The character list is empty</string>
+    <string name="search_hint">Search by name</string>
+    <string name="nothing_found">Nothing found</string>
     <string name="character_details_title">Character details</string>
     <string name="name_label">Name</string>
     <string name="gender_label">Gender</string>

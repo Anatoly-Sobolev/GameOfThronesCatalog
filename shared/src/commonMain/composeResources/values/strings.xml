@@ -10,6 +10,8 @@
     <string name="russian_language">Русский</string>
     <string name="english_language">English</string>
     <string name="empty_list">Список персонажей пуст</string>
+    <string name="search_hint">Поиск по имени</string>
+    <string name="nothing_found">Ничего не найдено</string>
     <string name="character_details_title">Информация о персонаже</string>
     <string name="name_label">Имя</string>
     <string name="gender_label">Пол</string>
