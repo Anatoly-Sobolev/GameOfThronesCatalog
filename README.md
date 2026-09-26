@@ -1,6 +1,6 @@
 # GameOfThronesCatalog
 
-Учебный каталог персонажей «Игры престолов» на Kotlin Multiplatform.
+Учебный каталог персонажей "Игры престолов" на Kotlin Multiplatform.
 
 This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
 
