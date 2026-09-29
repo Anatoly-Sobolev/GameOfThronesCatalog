@@ -1,39 +1,19 @@
-# GameOfThronesCatalog
+# Каталог персонажей «Игры престолов»
 
-Учебный каталог персонажей «Игры престолов» на Kotlin Multiplatform.
+Учебное приложение на Kotlin Multiplatform. Оно показывает список персонажей, позволяет искать их по имени, открывать подробности, менять тему и язык интерфейса.
 
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
+Данные персонажей пока находятся в памяти приложения в виде моков. Сеть и сохранение данных на диск не используются.
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Запуск на Desktop
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Откройте терминал в корневой папке проекта и выполните:
 
-### Running the apps
+```powershell
+.\gradlew.bat :desktopApp:run
+```
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
+## Основные папки
 
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
-- Web app:
-  - Wasm target (faster, modern browsers): `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
-  - JS target (slower, supports older browsers): `./gradlew :webApp:jsBrowserDevelopmentRun`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
----
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://kotlinlang.org/compose-multiplatform/),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
-
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+- `shared` — общий код приложения: экраны, навигация, состояние, моки и строковые ресурсы.
+- `desktopApp` — точка запуска Desktop-версии.
+- `androidApp`, `iosApp`, `webApp` — заготовки для остальных платформ.
