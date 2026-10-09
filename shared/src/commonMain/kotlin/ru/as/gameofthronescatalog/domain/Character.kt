@@ -8,4 +8,5 @@ data class Character(
     val born: String,
     val died: String,
     val titles: List<String>,
+    val fatherId: Int? = null,
 )

@@ -10,7 +10,7 @@
 - поиск персонажа по имени;
 - отображение заглушки вместо изображения;
 - просмотр подробной информации о персонаже;
-- переход к связанному персонажу;
+- переход к отцу персонажа, если он указан в исходных данных;
 - возврат к списку с сохранением запроса и положения прокрутки;
 - переключение светлой и тёмной темы;
 - переключение русского и английского языка;
@@ -35,14 +35,36 @@
 
 ## Запуск на компьютере
 
+Windows:
+
 ```powershell
 .\gradlew.bat :desktopApp:run
 ```
+
+macOS и Linux:
+
+```bash
+./gradlew :desktopApp:run
+```
+
+## Сборка Android-приложения
+
+```powershell
+.\gradlew.bat :androidApp:assembleDebug
+```
+
+На macOS и Linux используется та же задача через `./gradlew`.
 
 ## Запуск в браузере
 
 ```powershell
 .\gradlew.bat :webApp:wasmJsBrowserDevelopmentRun
+```
+
+На macOS и Linux:
+
+```bash
+./gradlew :webApp:wasmJsBrowserDevelopmentRun
 ```
 
 ## Проверка локализации

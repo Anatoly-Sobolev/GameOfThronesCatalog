@@ -1,4 +1,4 @@
-package ru.`as`.gameofthronescatalog.detail
+package ru.`as`.gameofthronescatalog.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,22 +20,16 @@ class CharacterDetailViewModel(
 
     init {
         viewModelScope.launch {
-            val characters = repository.getCharacters()
-            val characterIndex = characters.indexOfFirst { it.id == characterId }
-            val character = characters.getOrNull(characterIndex)
-            val relatedCharacter = if (characterIndex >= 0 && characters.size > 1) {
-                characters[(characterIndex + 1) % characters.size]
-            } else {
-                null
-            }
-            _state.value = CharacterDetailState(character, relatedCharacter)
+            val character = repository.getCharacter(characterId)
+            val father = character?.fatherId?.let { repository.getCharacter(it) }
+            _state.value = CharacterDetailState(character, father)
         }
     }
 
     fun onIntent(intent: CharacterDetailIntent) {
         when (intent) {
             CharacterDetailIntent.BackClicked -> navigator.back()
-            is CharacterDetailIntent.RelatedCharacterClicked -> {
+            is CharacterDetailIntent.FatherClicked -> {
                 navigator.open(Screen.Detail(intent.id))
             }
         }

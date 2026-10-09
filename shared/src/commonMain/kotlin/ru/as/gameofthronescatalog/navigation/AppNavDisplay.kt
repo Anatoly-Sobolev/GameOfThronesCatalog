@@ -13,13 +13,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import ru.`as`.gameofthronescatalog.CharacterDetailScreen
-import ru.`as`.gameofthronescatalog.CharacterListScreen
 import ru.`as`.gameofthronescatalog.Screen
-import ru.`as`.gameofthronescatalog.detail.CharacterDetailViewModel
-import ru.`as`.gameofthronescatalog.detail.CharacterDetailViewModelFactory
-import ru.`as`.gameofthronescatalog.list.CharacterListViewModel
-import ru.`as`.gameofthronescatalog.list.CharacterListViewModelFactory
+import ru.`as`.gameofthronescatalog.ui.detail.CharacterDetailScreen
+import ru.`as`.gameofthronescatalog.ui.detail.CharacterDetailViewModel
+import ru.`as`.gameofthronescatalog.ui.detail.CharacterDetailViewModelFactory
+import ru.`as`.gameofthronescatalog.ui.list.CharacterListScreen
+import ru.`as`.gameofthronescatalog.ui.list.CharacterListViewModel
+import ru.`as`.gameofthronescatalog.ui.list.CharacterListViewModelFactory
 
 private const val TransitionMilliseconds = 300
 

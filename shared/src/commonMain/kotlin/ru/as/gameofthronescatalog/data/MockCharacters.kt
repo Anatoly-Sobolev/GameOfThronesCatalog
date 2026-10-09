@@ -3,14 +3,14 @@ package ru.`as`.gameofthronescatalog.data
 import ru.`as`.gameofthronescatalog.domain.Character
 
 val mockCharacters = listOf(
-    Character(148, "Arya Stark", "Female", "Northmen", "In 289 AC, at Winterfell", "", listOf("Princess")),
+    Character(148, "Arya Stark", "Female", "Northmen", "In 289 AC, at Winterfell", "", listOf("Princess"), fatherId = 339),
     Character(583, "Jon Snow", "Male", "Northmen", "In 283 AC", "", listOf("Lord Commander of the Night's Watch")),
     Character(271, "Daenerys Targaryen", "Female", "", "In 172 AC", "", listOf("Princess")),
     Character(339, "Eddard Stark", "Male", "Northmen", "In 263 AC, at Winterfell", "In 299 AC, at Great Sept of Baelor in King's Landing", listOf("Lord of Winterfell", "Warden of the North", "Hand of the King", "Protector of the Realm", "Regent")),
     Character(232, "Catelyn Stark", "Female", "Rivermen", "In 264 AC, at Riverrun", "In 299 AC, at the Twins", listOf("Lady of Winterfell")),
-    Character(957, "Sansa Stark", "Female", "Northmen", "In 286 AC, at Winterfell", "", listOf("Princess")),
-    Character(208, "Brandon Stark", "Male", "Northmen", "In 290 AC, at Winterfell", "", listOf("Prince of Winterfell")),
-    Character(1880, "Robb Stark", "Male", "", "283 AC, at Riverrun", "299 AC, at the Twins", listOf("King in the North", "King of the Trident", "Lord of Winterfell")),
+    Character(957, "Sansa Stark", "Female", "Northmen", "In 286 AC, at Winterfell", "", listOf("Princess"), fatherId = 339),
+    Character(208, "Brandon Stark", "Male", "Northmen", "In 290 AC, at Winterfell", "", listOf("Prince of Winterfell"), fatherId = 339),
+    Character(1880, "Robb Stark", "Male", "", "283 AC, at Riverrun", "299 AC, at the Twins", listOf("King in the North", "King of the Trident", "Lord of Winterfell"), fatherId = 339),
     Character(1052, "Tyrion Lannister", "Male", "", "In 273 AC, at Casterly Rock", "", listOf("Acting Hand of the King (former)", "Master of Coin (former)")),
     Character(529, "Jaime Lannister", "Male", "Westerlands", "In 266 AC, at Casterly Rock", "", listOf("Ser", "Lord Commander of the Kingsguard", "Warden of the East (formerly)")),
     Character(238, "Cersei Lannister", "Female", "Westerman", "In 266 AC, at Casterly Rock", "", listOf("Light of the West", "Queen Dowager", "Protector of the Realm", "Lady of Casterly Rock", "Queen Regent")),

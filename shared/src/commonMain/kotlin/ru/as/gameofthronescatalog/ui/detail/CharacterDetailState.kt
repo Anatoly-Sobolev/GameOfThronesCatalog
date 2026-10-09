@@ -1,8 +1,8 @@
-package ru.`as`.gameofthronescatalog.detail
+package ru.`as`.gameofthronescatalog.ui.detail
 
 import ru.`as`.gameofthronescatalog.domain.Character
 
 data class CharacterDetailState(
     val character: Character? = null,
-    val relatedCharacter: Character? = null,
+    val father: Character? = null,
 )

@@ -1,4 +1,4 @@
-package ru.`as`.gameofthronescatalog.list
+package ru.`as`.gameofthronescatalog.ui.list
 
 sealed interface CharacterListIntent {
     data class SearchQueryChanged(val query: String) : CharacterListIntent

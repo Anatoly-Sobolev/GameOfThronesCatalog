@@ -1,4 +1,4 @@
-package ru.`as`.gameofthronescatalog
+package ru.`as`.gameofthronescatalog.ui.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,9 +26,8 @@ import gameofthronescatalog.shared.generated.resources.nothing_found
 import gameofthronescatalog.shared.generated.resources.open_details
 import gameofthronescatalog.shared.generated.resources.search_hint
 import org.jetbrains.compose.resources.stringResource
+import ru.`as`.gameofthronescatalog.CharacterPlaceholder
 import ru.`as`.gameofthronescatalog.domain.Character
-import ru.`as`.gameofthronescatalog.list.CharacterListIntent
-import ru.`as`.gameofthronescatalog.list.CharacterListState
 
 @Composable
 fun CharacterListScreen(

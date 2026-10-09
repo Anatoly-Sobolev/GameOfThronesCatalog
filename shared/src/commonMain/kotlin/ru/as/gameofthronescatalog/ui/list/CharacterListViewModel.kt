@@ -1,4 +1,4 @@
-package ru.`as`.gameofthronescatalog.list
+package ru.`as`.gameofthronescatalog.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

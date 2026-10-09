@@ -1,4 +1,4 @@
-package ru.`as`.gameofthronescatalog
+package ru.`as`.gameofthronescatalog.ui.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,12 +24,11 @@ import gameofthronescatalog.shared.generated.resources.died_label
 import gameofthronescatalog.shared.generated.resources.gender_label
 import gameofthronescatalog.shared.generated.resources.name_label
 import gameofthronescatalog.shared.generated.resources.not_available
-import gameofthronescatalog.shared.generated.resources.related_character
+import gameofthronescatalog.shared.generated.resources.father_label
 import gameofthronescatalog.shared.generated.resources.titles_label
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import ru.`as`.gameofthronescatalog.detail.CharacterDetailIntent
-import ru.`as`.gameofthronescatalog.detail.CharacterDetailState
+import ru.`as`.gameofthronescatalog.CharacterPlaceholder
 
 @Composable
 fun CharacterDetailScreen(
@@ -68,8 +67,8 @@ fun CharacterDetailScreen(
             CharacterField(Res.string.died_label, character.died)
             CharacterField(Res.string.titles_label, character.titles.joinToString())
 
-            val relatedCharacter = state.relatedCharacter
-            if (relatedCharacter != null) {
+            val father = state.father
+            if (father != null) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -80,19 +79,19 @@ fun CharacterDetailScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         Text(
-                            text = stringResource(Res.string.related_character),
+                            text = stringResource(Res.string.father_label),
                             style = MaterialTheme.typography.titleMedium,
                         )
                         Button(
                             onClick = {
                                 onIntent(
-                                    CharacterDetailIntent.RelatedCharacterClicked(
-                                        relatedCharacter.id,
+                                    CharacterDetailIntent.FatherClicked(
+                                        father.id,
                                     ),
                                 )
                             },
                         ) {
-                            Text(relatedCharacter.name)
+                            Text(father.name)
                         }
                     }
                 }
