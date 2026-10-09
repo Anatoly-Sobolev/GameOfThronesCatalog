@@ -16,8 +16,8 @@ fun main() {
     Locale.setDefault(Locale.forLanguageTag("ru"))
 
     application {
-        var windowLanguage by remember { mutableStateOf(AppLanguage.Russian) }
-        val windowTitle = key(windowLanguage) {
+        var language by remember { mutableStateOf(AppLanguage.Russian) }
+        val windowTitle = key(language) {
             stringResource(Res.string.app_name)
         }
 
@@ -26,10 +26,11 @@ fun main() {
             title = windowTitle,
         ) {
             App(
-                onLanguageChanged = { language ->
-                    val languageTag = if (language == AppLanguage.Russian) "ru" else "en"
+                language = language,
+                onLanguageChanged = { newLanguage ->
+                    val languageTag = if (newLanguage == AppLanguage.Russian) "ru" else "en"
                     Locale.setDefault(Locale.forLanguageTag(languageTag))
-                    windowLanguage = language
+                    language = newLanguage
                 },
             )
         }

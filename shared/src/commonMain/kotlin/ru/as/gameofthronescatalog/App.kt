@@ -21,11 +21,20 @@ import ru.`as`.gameofthronescatalog.ui.list.CharacterListViewModelFactory
 
 @Composable
 @Preview
+fun App() {
+    var language by remember { mutableStateOf(AppLanguage.Russian) }
+    App(
+        language = language,
+        onLanguageChanged = { language = it },
+    )
+}
+
+@Composable
 fun App(
-    onLanguageChanged: (AppLanguage) -> Unit = {},
+    language: AppLanguage,
+    onLanguageChanged: (AppLanguage) -> Unit,
 ) {
     var isDarkTheme by remember { mutableStateOf(false) }
-    var language by remember { mutableStateOf(AppLanguage.Russian) }
     val repository: CharacterRepository = remember { CharacterRepositoryImpl() }
     val navigator = remember { Navigator() }
     val listViewModelFactory = remember {
@@ -50,7 +59,6 @@ fun App(
                                 AppLanguage.Russian
                             }
                             onLanguageChanged(newLanguage)
-                            language = newLanguage
                         },
                     )
                     AppNavDisplay(
