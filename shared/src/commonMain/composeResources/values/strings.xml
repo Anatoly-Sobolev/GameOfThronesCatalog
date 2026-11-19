@@ -22,4 +22,5 @@
     <string name="not_available">Нет данных</string>
     <string name="character_not_found">Персонаж не найден</string>
     <string name="father_label">Отец</string>
+    <string name="retry_load">Ошибка загрузки. Повторить</string>
 </resources>

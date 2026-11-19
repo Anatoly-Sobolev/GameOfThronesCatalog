@@ -1,5 +1,6 @@
 package ru.`as`.gameofthronescatalog.ui.detail
 
+import ru.`as`.gameofthronescatalog.ui.LoadStatus
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.CircularProgressIndicator
+import gameofthronescatalog.shared.generated.resources.retry_load
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -50,7 +53,11 @@ fun CharacterDetailScreen(
         )
 
         val character = state.character
-        if (character == null) {
+        if (state.status == LoadStatus.Loading) {
+            CircularProgressIndicator()
+        } else if (state.status == LoadStatus.Failed) {
+            Button(onClick = { onIntent(CharacterDetailIntent.Retry) }) { Text(stringResource(Res.string.retry_load)) }
+        } else if (character == null) {
             Text(
                 text = stringResource(Res.string.character_not_found),
                 modifier = Modifier.padding(16.dp),
