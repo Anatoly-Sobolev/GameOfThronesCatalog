@@ -1,5 +1,6 @@
 package ru.`as`.gameofthronescatalog.ui.list
 
+import ru.`as`.gameofthronescatalog.ui.LoadStatus
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.CircularProgressIndicator
+import gameofthronescatalog.shared.generated.resources.retry_load
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,7 +58,11 @@ fun CharacterListScreen(
             singleLine = true,
         )
 
-        if (state.characters.isEmpty()) {
+        if (state.characters.isEmpty() && state.status == LoadStatus.Loading) {
+            CircularProgressIndicator()
+        } else if (state.characters.isEmpty() && state.status == LoadStatus.Failed) {
+            Button(onClick = { onIntent(CharacterListIntent.LoadPage) }) { Text(stringResource(Res.string.retry_load)) }
+        } else if (state.characters.isEmpty()) {
             Text(
                 text = stringResource(
                     if (state.searchQuery.isBlank()) {
@@ -74,6 +81,14 @@ fun CharacterListScreen(
             ) {
                 items(state.characters, key = { it.id }) { character ->
                     CharacterCard(character, onIntent)
+                }
+                if (state.more) item {
+                    if (state.status == LoadStatus.Failed) {
+                        Button(onClick = { onIntent(CharacterListIntent.LoadPage) }) { Text(stringResource(Res.string.retry_load)) }
+                    } else {
+                        androidx.compose.runtime.LaunchedEffect(state.characters.size) { onIntent(CharacterListIntent.LoadPage) }
+                        CircularProgressIndicator()
+                    }
                 }
             }
         }

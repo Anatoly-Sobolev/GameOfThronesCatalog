@@ -1,5 +1,6 @@
 package ru.`as`.gameofthronescatalog.ui.list
 
+import ru.`as`.gameofthronescatalog.ui.LoadStatus
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,32 +16,41 @@ class CharacterListViewModel(
     private val navigator: Navigator,
     private val repository: CharacterRepository,
 ) : ViewModel() {
-    private var allCharacters = emptyList<Character>()
-
     private val _state = MutableStateFlow(CharacterListState())
-    val state: StateFlow<CharacterListState> = _state.asStateFlow()
+    val state = _state.asStateFlow()
+    private var job: kotlinx.coroutines.Job? = null
+    private var nextPage = 1
 
-    init {
-        viewModelScope.launch {
-            allCharacters = repository.getCharacters()
-            _state.value = CharacterListState(characters = allCharacters)
+    init { fetch() }
+
+    private fun fetch(debounce: Boolean = false) {
+        val current = _state.value
+        _state.value = current.copy(status = LoadStatus.Loading)
+        job = viewModelScope.launch {
+            try {
+                if (debounce) kotlinx.coroutines.delay(400)
+                val page = repository.getCharacters(current.searchQuery, nextPage)
+                nextPage++
+                _state.value = current.copy(characters = current.characters + page,
+                    status = LoadStatus.Ready, more = page.size == 20)
+            } catch (cancelled: kotlinx.coroutines.CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
+                _state.value = current.copy(status = LoadStatus.Failed)
+            }
         }
     }
 
     fun onIntent(intent: CharacterListIntent) {
         when (intent) {
             is CharacterListIntent.SearchQueryChanged -> {
-                _state.value = CharacterListState(
-                    searchQuery = intent.query,
-                    characters = allCharacters.filter { character ->
-                        character.name.contains(intent.query, ignoreCase = true)
-                    },
-                )
+                job?.cancel()
+                nextPage = 1
+                _state.value = CharacterListState(searchQuery = intent.query)
+                fetch(debounce = true)
             }
-
-            is CharacterListIntent.CharacterClicked -> {
-                navigator.open(Screen.Detail(intent.id))
-            }
+            CharacterListIntent.LoadPage -> if (_state.value.status != LoadStatus.Loading && (_state.value.more || _state.value.status == LoadStatus.Failed)) fetch()
+            is CharacterListIntent.CharacterClicked -> navigator.open(Screen.Detail(intent.id))
         }
     }
 }

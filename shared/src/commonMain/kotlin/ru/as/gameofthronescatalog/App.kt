@@ -35,7 +35,8 @@ fun App(
     onLanguageChanged: (AppLanguage) -> Unit,
 ) {
     var isDarkTheme by remember { mutableStateOf(false) }
-    val repository: CharacterRepository = remember { CharacterRepositoryImpl() }
+    val repository = remember { CharacterRepositoryImpl() }
+    androidx.compose.runtime.DisposableEffect(repository) { onDispose { repository.close() } }
     val navigator = remember { Navigator() }
     val listViewModelFactory = remember {
         CharacterListViewModelFactory(navigator, repository)

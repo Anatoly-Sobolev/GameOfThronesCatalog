@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
@@ -55,10 +56,17 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            implementation(libs.ktor.cio)
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
         }
+        jvmMain.dependencies { implementation(libs.ktor.cio) }
+        wasmJsMain.dependencies { implementation(libs.ktor.js) }
+        iosMain.dependencies { implementation(libs.ktor.darwin) }
         commonMain.dependencies {
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.content)
+            implementation(libs.ktor.json)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -75,6 +83,7 @@ kotlin {
             implementation(libs.kotlin.test)
         }
         jsMain.dependencies {
+            implementation(libs.ktor.js)
             implementation(libs.wrappers.browser)
         }
     }
